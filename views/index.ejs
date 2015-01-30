@@ -19,31 +19,31 @@
           <a class="navbar-brand" href="#">Nodejs UpStage trial <small>with bootstrap</small></a>
       </div>
     </div>
-    <div class="container">
+    <div class="container-fluid">
       <div id="dashboard">
         <!--Yue: components are actually from bootstrap css file -->
         <div class="row" />
-          <div class="span2 col-md-6">
+          <div class="span2 col-md-8">
             <!-- <p>Drawing</p> -->
-            <div class="container container-main">
+            <!-- <div class="container container-main"> -->
               <div class="container-canvas">
-                <canvas id="mycanvas" width="800" height="480">
+                <canvas id="mycanvas" width="600" height="480">
                   This is my fallback content.
                 </canvas>
               </div>
-            </div>
+            <!-- </div> -->
           </div>
-          <div class="span6">
-            <div class="row">
+          <div class="span2 col-md-4">
+            <!-- <div class="row"> -->
               <div class="span6 pre-scrollable">
                 <b>Users</b>
                 <hr />
                 <div id="users"></div>
                 <hr class="visible-xs visible-sm"/>
               </div>
-            </div>
+            <!-- </div> -->
             <div class="row">
-              <input class="span6" id="data" placeholder="send message" />
+              <input class="span12" id="data" placeholder="send message" />
               <div class="pre-scrollable span6" id="conversation"></div>
             </div>
           </div>
