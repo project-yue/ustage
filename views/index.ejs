@@ -30,7 +30,7 @@
             </div>
           </div>
           <div class="col-md-4">
-            <div class="row" style="border: 1px solid black">
+            <div class="row" style="border: 1px solid green height:40%">
               <b>Player</b>
               <hr />
               <div id="users" class="pre-scrollable"></div>
@@ -39,15 +39,15 @@
             <div class="row">
               <!-- trying with longer input field-->
               <input type="text" class="from-control col-md-12" id="data" placeholder="send message" />
-              <!-- <div class="pre-scrollable span6" id="conversation"></div> -->
             </div>
-            <!-- col makes the content line wrap -->
-            <div class="row">
+            <div class="row" style="border: 1px solid green height:40%">
+              <!-- col makes the content line wrap -->
               <div class="pre-scrollable col-md-12" id="conversation"></div>
             </div>
           </div>
         </div>
       </div>
+
       <script>
 
         function getName() {
@@ -97,7 +97,7 @@
         }
 
         // trial start
-        // $("body").append(_buildUserCreate());
+        // $("dashboard").append(_buildUserCreate());
         // $('.userNameModal').on('shown', function () {
         //   $(".confirm").click(function(){
         //     DP.myName = $(".userNameInput").val().trim();
@@ -134,7 +134,8 @@
         socket.on('updateusers', function(data) {
           $('#users').empty();
           $.each(data, function(key, value) {
-            $('#users').append('<div><a href="' + searchUrlFor(key) + '" target="_blank">' + key + '</div>');
+            // $('#users').append('<div><a href="' + searchUrlFor(key) + '" target="_blank">' + key + '</div>');
+            $('#users').prepend('<div><a href="' + searchUrlFor(key) + '" target="_blank">' + key + '</div>');
           });
         });
 
@@ -142,11 +143,16 @@
           var searchUrl = searchUrlFor(data.username);
           if(data.connected) {
             if(data.to_self) data.username = "you";
-
-            $('#conversation').append('connected: <a href="' + searchUrl + '" target="_blank">' + escaped(data.username) + "</a><br/>");
+            $('#conversation').prepend('connected: <a href="' + searchUrl + '" target="_blank">' + escaped(data.username) + "</a><br/>");
           } else {
-            $('#conversation').append('disconnected: <a href="' + searchUrl + '" target="_blank">' + escaped(data.username) + "</a><br/>");
+            $('#conversation').prepend('disconnected: <a href="' + searchUrl + '" target="_blank">' + escaped(data.username) + "</a><br/>");
           }
+          // if(data.connected) {
+          //   if(data.to_self) data.username = "you";
+          //   $('#conversation').append('connected: <a href="' + searchUrl + '" target="_blank">' + escaped(data.username) + "</a><br/>");
+          // } else {
+          //   $('#conversation').append('disconnected: <a href="' + searchUrl + '" target="_blank">' + escaped(data.username) + "</a><br/>");
+          // }
         });
 
         // on load of page
