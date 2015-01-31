@@ -9,71 +9,44 @@
     <link rel="stylesheet" href="/public/bootstrap.css" />
     <script src="/public/bootstrap.js"></script>
     <link rel="stylesheet" href="/public/app.css" />
-    <!-- drawing script -->
-    <script src="/public/draw.js"></script>
-    <!-- drawing script -->
   </head>
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-          <a class="navbar-brand" href="#">Nodejs UpStage trial <small>with bootstrap</small></a>
-      </div>
-    </div>
+
     <div class="container-fluid">
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="#">Nodejs UpStage trial <small>with bootstrap</small></a>
+        </div>
+      </div>
       <div id="dashboard">
         <!--Yue: components are actually from bootstrap css file -->
-        <div class="row" />
-          <div class="span2 col-md-8">
-            <!-- <p>Drawing</p> -->
-            <!-- <div class="container container-main"> -->
-              <div class="container-canvas">
-                <canvas id="mycanvas" width="600" height="480">
-                  This is my fallback content.
-                </canvas>
-              </div>
-            <!-- </div> -->
-          </div>
-          <div class="span2 col-md-4">
-            <!-- <div class="row"> -->
-              <div class="span6 pre-scrollable">
-                <b>Users</b>
-                <hr />
-                <div id="users"></div>
-                <hr class="visible-xs visible-sm"/>
-              </div>
-            <!-- </div> -->
-            <div class="row">
-              <input class="span12" id="data" placeholder="send message" />
-              <div class="pre-scrollable span6" id="conversation"></div>
+        <div class="row" >
+        <!-- the canvas. still work on a new way of resizing canvas dynamically -->
+          <div class="col-md-8">
+            <div class="container-canvas" style="border: 1px solid green">
+              <canvas id="mycanvas" width="600" height="480">
+                This is my fallback content.
+              </canvas>
             </div>
           </div>
-          <!-- testing finished -->
-              <!-- <div class="col-md-2 pre-scrollable span6">
-                <b>Users</b>
-                <hr />
-                <div id="users"></div>
-                <hr class="visible-xs visible-sm"/>
-              </div> -->
-              <!-- <div class="col-md-4">
-                <input class="col-md-6" id="data" placeholder="send message" /> -->
-                <!-- <input class="col-md-2" id="data" placeholder="send message" /> -->
-                <!-- <hr/>
-                <div class="pre-scrollable span6" id="conversation"></div>
-              </div> -->
-            <!-- </div> -->
+          <div class="col-md-4">
+            <div class="row" style="border: 1px solid black">
+              <b>Player</b>
+              <hr />
+              <div id="users" class="pre-scrollable"></div>
+              <!-- <hr class="visible-xs visible-sm"/> -->
+            </div>
+            <div class="row">
+              <!-- trying with longer input field-->
+              <input type="text" class="from-control col-md-12" id="data" placeholder="send message" />
+              <!-- <div class="pre-scrollable span6" id="conversation"></div> -->
+            </div>
+            <!-- col makes the content line wrap -->
+            <div class="row">
+              <div class="pre-scrollable col-md-12" id="conversation"></div>
+            </div>
           </div>
-          <!-- <div class="col-md-2">
-            <b>Users</b>
-            <hr />
-            <div id="users"></div>
-            <hr class="visible-xs visible-sm"/>
-          </div>
-          <div class="col-md-2">
-            <input class="col-md-6" id="data" placeholder="send message" />
-            <input class="col-md-2" id="data" placeholder="send message" />
-            <hr/>
-            <div id="conversation"></div>
-          </div> -->
+        </div>
       </div>
       <script>
 
@@ -136,6 +109,11 @@
         // trial end
         // $('#basicModal').modal(options);
         //
+        // popup modal when load starts
+        // $(window).load(function(){
+        //  $('#myModal').modal('show');
+        // });
+        // popup modal when load ends
         var name = getName();
         $("#data").attr('placeholder', 'send message as ' + name);
 
@@ -184,7 +162,7 @@
           });
         });
       </script>
-    <!-- </div> -->
+    </div>
     <!-- This is canvas drawing function with bootstrap -->
     <!-- <div class="container container-main">
       <div class="container-canvas">
@@ -196,7 +174,6 @@
     <!-- reqired jquery version 1.9.1 or higher -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
     <script>
     function draw() {
       var canvas = document.getElementById("mycanvas");
