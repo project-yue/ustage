@@ -44,23 +44,16 @@ io.sockets.on('connection', function(socket) {
   // when user connects event
   socket.on('adduser', function(username) {
     socket.username = username;
-
     usernames[username] = username;
-
     socket.emit('servernotification', { connected: true, to_self: true, username: username });
-
     socket.broadcast.emit('servernotification', { connected: true, username: username });
-
     io.sockets.emit('updateusers', usernames);
   });
 
   // when the user disconnects.. perform this
   socket.on('disconnect', function(){
-
     delete usernames[socket.username];
-
     io.sockets.emit('updateusers', usernames);
-
     socket.broadcast.emit('servernotification', { username: socket.username });
   });
 
@@ -68,6 +61,6 @@ io.sockets.on('connection', function(socket) {
   // socket.on("drawing", function(msg){
   //   io.emit("drawing", msg);
   // });
-  
+
 
 });
