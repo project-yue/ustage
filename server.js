@@ -41,6 +41,7 @@ io.sockets.on('connection', function(socket) {
     io.sockets.emit('updatechat', socket.username, data);
   });
 
+  // when user connects event
   socket.on('adduser', function(username) {
     socket.username = username;
 
@@ -67,5 +68,6 @@ io.sockets.on('connection', function(socket) {
   // socket.on("drawing", function(msg){
   //   io.emit("drawing", msg);
   // });
+  
 
 });
