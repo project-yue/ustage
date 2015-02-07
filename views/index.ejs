@@ -2,6 +2,12 @@
 <html lang="en">
   <head>
     <% include partials/head.ejs %>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $("#myModal").modal('show');
+        // alert("page is on load");
+      });
+    </script>
   </head>
   <body>
     <div class="container-fluid">
@@ -11,7 +17,14 @@
     <main>
       <% include partials/main.ejs %>
     </main>
-      <script>
+    <%include partials/modal.ejs %>
+    <script>
+        // $(document).ready(function() {
+        //   alert("document ready occurred!");
+        // });
+        // $(window).load(function() {
+        //   alert("window load occurred!");
+        // });
         function getName() {
           var name = window.names[Math.floor(Math.random() * window.names.length)];
 
@@ -103,8 +116,7 @@
       </div>
     </div> -->
     <!-- reqired jquery version 1.9.1 or higher -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+
     <script>
     function draw() {
       var canvas = document.getElementById("mycanvas");
@@ -121,7 +133,7 @@
         alert("Canvas isn't supported.");
       }
     }
-    
+
     $(function() {
       draw();
       // prepareCanvas();
