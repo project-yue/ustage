@@ -5,6 +5,7 @@ var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 var nodes = { };
 var usernames = {};
+var audienceNum = 0;
 var port = 3000;
 server.listen(process.env.PORT || port);
 console.log('server is listening on ' + port);
@@ -43,15 +44,18 @@ io.sockets.on('connection', function(socket) {
 
   // when user connects event
   socket.on('adduser', function(username) {
+    // audienceNum++;
     socket.username = username;
     usernames[username] = username;
     socket.emit('servernotification', { connected: true, to_self: true, username: username });
     socket.broadcast.emit('servernotification', { connected: true, username: username });
     io.sockets.emit('updateusers', usernames);
+    // console.log(audienceNum);
   });
 
   // when the user disconnects.. perform this
   socket.on('disconnect', function(){
+    audienceNum--;
     delete usernames[socket.username];
     io.sockets.emit('updateusers', usernames);
     socket.broadcast.emit('servernotification', { username: socket.username });

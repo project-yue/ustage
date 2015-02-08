@@ -19,12 +19,6 @@
     </main>
     <%include partials/modal.ejs %>
     <script>
-        // $(document).ready(function() {
-        //   alert("document ready occurred!");
-        // });
-        // $(window).load(function() {
-        //   alert("window load occurred!");
-        // });
         function getName() {
           var name = window.names[Math.floor(Math.random() * window.names.length)];
 
@@ -57,10 +51,14 @@
 
         var socket = io.connect('/');
 
+        // test add audience
+
+        // test ends
+
         // on connection to server, ask for user's name with an anonymous callback
         socket.on('connect', function() {
           // call the server-side function 'adduser' and send one parameter (value of prompt)
-          socket.emit('adduser', name);
+          // socket.emit('adduser', name);
         });
 
         // listener, whenever the server emits 'updatechat', this updates the chat body
@@ -100,9 +98,13 @@
         });
         // sign in button binding
         $(function(){
-          $('#signInBtn').on('click', function (e) {
-            // $('#myModal').modal('toggle');
-            alert("hi");
+          $('#signInBtn').on('click', function () {
+            $('#myModal').modal('toggle');
+            // alert("hi");
+            // $(document).ready(function(){
+            //   $("#myModal").modal('show');
+            //   alert("page is on load");
+            // });
           });
         });
       </script>
