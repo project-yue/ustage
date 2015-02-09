@@ -3,10 +3,7 @@
   <head>
     <% include partials/head.ejs %>
     <script type="text/javascript">
-      $(document).ready(function(){
-        $("#myModal").modal('show');
-        // alert("page is on load");
-      });
+      $(document).ready($("#myModal").modal('show'));
     </script>
   </head>
   <body>
@@ -19,6 +16,11 @@
     </main>
     <%include partials/modal.ejs %>
     <script>
+        // rewrite modal binding, fixed modal shows and immediately disappears issue
+        function toggleModalButton() {
+            $('#myModal').modal('toggle');
+        }
+
         function getName() {
           var name = window.names[Math.floor(Math.random() * window.names.length)];
 
@@ -45,15 +47,15 @@
           var time = dt.getHours() + ":" + dt.getMinutes() + ":"+ dt.getSeconds();
           return time;
         }
+        // sign in button binding
+        $(function(){
+          $('#signInBtn').on('click', toggleModalButton());
+        });
 
         var name = getName();
         $("#data").attr('placeholder', 'send message as ' + name);
 
         var socket = io.connect('/');
-
-        // test add audience
-
-        // test ends
 
         // on connection to server, ask for user's name with an anonymous callback
         socket.on('connect', function() {
@@ -96,17 +98,7 @@
             }
           });
         });
-        // sign in button binding
-        $(function(){
-          $('#signInBtn').on('click', function () {
-            $('#myModal').modal('toggle');
-            // alert("hi");
-            // $(document).ready(function(){
-            //   $("#myModal").modal('show');
-            //   alert("page is on load");
-            // });
-          });
-        });
+
       </script>
     </div>
     <!-- This is canvas drawing function with bootstrap -->
