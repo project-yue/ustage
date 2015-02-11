@@ -1,5 +1,4 @@
-##NodeJS Chat (MIT License)
+##UpStage redesign
+This is a prototype of new UpStage. This project aims resolving the issues in the current UpStage implementaion.
 
-A node js chat app using web sockets (socket.io)
-
-Modified version of: https://github.com/amirrajan/nodejs-chat
+This project doesn't follow the User Stories from current implementation. It is developed for UpStage functionality only.
