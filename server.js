@@ -1,5 +1,4 @@
 var express = require('express');
-// var _ = require('underscore');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
@@ -15,13 +14,9 @@ app.use(express.methodOverride());
 app.use(express.bodyParser());
 app.use(app.router);
 app.use('/public', express.static('public'));
-// app.use(express.static(__dirname + "/public"));
 
 app.get('/', function (req, res) {
   res.render('index');
-  // drawing starts
-  // res.sendFile(__dirname + "/views/index.ejs");
-  // drawing ends
 });
 
 io.sockets.on('connection', function(socket) {
@@ -40,6 +35,13 @@ io.sockets.on('connection', function(socket) {
     }).start();
     //test end
     io.sockets.emit('updatechat', socket.username, data);
+  });
+
+  // here is the thing for updating audienceNum; work in progress
+  socket.on('addAudience', function(){
+    audienceNum++;
+    console.log("number is " +audienceNum);
+    // io.sockets.emit('updateAudience', audienceNum);
   });
 
   // when user connects event
