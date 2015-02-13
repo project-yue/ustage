@@ -20,6 +20,7 @@ app.get('/', function (req, res) {
 });
 
 io.sockets.on('connection', function(socket) {
+
   socket.on('sendchat', function (data) {
     // test start,
     // it currently only works on the server-end.
@@ -39,25 +40,24 @@ io.sockets.on('connection', function(socket) {
 
   // here is the thing for updating audienceNum; work in progress
   socket.on('addAudience', function(){
-    audienceNum++;
-    console.log("number is " +audienceNum);
-    // io.sockets.emit('updateAudience', audienceNum);
+    ++audienceNum;
+    console.log("number is " + audienceNum);
+    io.sockets.emit('updateAudience', audienceNum);
   });
 
   // when user connects event
   socket.on('adduser', function(username) {
-    // audienceNum++;
     socket.username = username;
     usernames[username] = username;
     socket.emit('servernotification', { connected: true, to_self: true, username: username });
     socket.broadcast.emit('servernotification', { connected: true, username: username });
     io.sockets.emit('updateusers', usernames);
-    // console.log(audienceNum);
   });
 
   // when the user disconnects.. perform this
   socket.on('disconnect', function(){
-    audienceNum--;
+    --audienceNum;
+    io.sockets.emit('updateAudience', audienceNum);
     delete usernames[socket.username];
     io.sockets.emit('updateusers', usernames);
     socket.broadcast.emit('servernotification', { username: socket.username });

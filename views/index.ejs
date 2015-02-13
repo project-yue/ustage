@@ -47,6 +47,7 @@
           var time = dt.getHours() + ":" + dt.getMinutes() + ":"+ dt.getSeconds();
           return time;
         }
+
         // sign in button binding
         $(function(){
           $('#signInBtn').on('click', toggleModalButton());
@@ -57,19 +58,19 @@
 
         var socket = io.connect('/');
 
-        // audience connects
-        // socket.on('connect', function(){
-        // });
-
 
         // on connection to server, ask for user's name with an anonymous callback
-        // currently disabled for audience
         socket.on('connect', function() {
           // call the server-side function 'adduser' and send one parameter (value of prompt)
           socket.emit('adduser', name);
+          socket.emit('addAudience');
         });
 
         // listener, whenever the server emits 'addAudience', update audience number.
+        // under test
+        socket.on('updateAudience', function (number){
+            $('#audience').text('Audience ' + number);
+        });
 
         // listener, whenever the server emits 'updatechat', this updates the chat body
         socket.on('updatechat', function (username, data) {
