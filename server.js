@@ -38,12 +38,15 @@ io.sockets.on('connection', function(socket) {
     io.sockets.emit('updatechat', socket.username, data);
   });
 
-  // here is the thing for updating audienceNum; work in progress
+
+  // here is the thing for adding audience number
   socket.on('addAudience', function(){
+    // must be ++ first; otherwise, the audience number is always shows 1 less
+    // the correct number
     ++audienceNum;
-    console.log("number is " + audienceNum);
     io.sockets.emit('updateAudience', audienceNum);
   });
+
 
   // when user connects event
   socket.on('adduser', function(username) {

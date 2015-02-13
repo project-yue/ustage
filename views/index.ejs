@@ -53,8 +53,12 @@
           $('#signInBtn').on('click', toggleModalButton());
         });
 
-        var name = getName();
-        $("#data").attr('placeholder', 'send message as ' + name);
+        var name = "";
+        if(name == ""){
+          $("#data").attr('placeholder', 'send message as audience');
+        }else{
+          $("#data").attr('placeholder', 'send message as ' + name);
+        }
 
         var socket = io.connect('/');
 
@@ -62,7 +66,7 @@
         // on connection to server, ask for user's name with an anonymous callback
         socket.on('connect', function() {
           // call the server-side function 'adduser' and send one parameter (value of prompt)
-          socket.emit('adduser', name);
+          // socket.emit('adduser', name);
           socket.emit('addAudience');
         });
 
@@ -74,7 +78,12 @@
 
         // listener, whenever the server emits 'updatechat', this updates the chat body
         socket.on('updatechat', function (username, data) {
-          $('#conversation').prepend(getSystemTime() + ' <b>'+  escaped(username) + ':</b> ' + escaped(data) + "<br/>");
+          if(escaped(username) == ""){
+            // when user is not logged in
+            $('#conversation').prepend(getSystemTime() + ' <b>'+ 'Audience' + ':</b> ' + escaped(data) + "<br/>");
+          }else{
+            $('#conversation').prepend(getSystemTime() + ' <b>'+  escaped(username) + ':</b> ' + escaped(data) + "<br/>");
+          }
         });
 
         // listener, whenever the server emits 'updateusers', this updates the username list
