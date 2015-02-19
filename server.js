@@ -45,16 +45,19 @@ io.sockets.on('connection', function(socket) {
     // the correct number
     ++audienceNum;
     io.sockets.emit('updateAudience', audienceNum);
+    io.sockets.emit('updateusers', usernames);
   });
 
 
   // when user connects event
   socket.on('adduser', function(username) {
-    socket.username = username;
-    usernames[username] = username;
-    socket.emit('servernotification', { connected: true, to_self: true, username: username });
-    socket.broadcast.emit('servernotification', { connected: true, username: username });
-    io.sockets.emit('updateusers', usernames);
+    if(socket.username === undefined){
+      socket.username = username;
+      usernames[username] = username;
+      socket.emit('servernotification', { connected: true, to_self: true, username: username });
+      socket.broadcast.emit('servernotification', { connected: true, username: username });
+      io.sockets.emit('updateusers', usernames);
+    }
   });
 
   // when the user disconnects.. perform this
