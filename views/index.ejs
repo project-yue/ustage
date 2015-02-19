@@ -2,9 +2,6 @@
 <html lang="en">
   <head>
     <% include partials/head.ejs %>
-    <script type="text/javascript">
-      $(document).ready($("#myModal").modal('show'));
-    </script>
   </head>
   <body>
     <div class="container-fluid">
@@ -16,10 +13,11 @@
     </main>
     <%include partials/modal.ejs %>
     <script>
+
         // rewrite modal binding, fixed modal shows and immediately disappears issue
-        function toggleModalButton() {
-            $('#myModal').modal('toggle');
-        }
+        // function toggleModalButton() {
+        //     $('#myModal').modal('toggle');
+        // }
 
         function getName() {
           var name = window.names[Math.floor(Math.random() * window.names.length)];
@@ -47,21 +45,34 @@
           var time = dt.getHours() + ":" + dt.getMinutes() + ":"+ dt.getSeconds();
           return time;
         }
+        // name field
+        var name = "";
 
         // sign in button binding
-        $(function(){
-          $('#signInBtn').on('click', toggleModalButton());
-        });
+        // $(function(){
+          // $('#signInBtn').on('click', toggleModalButton());
+        // });
 
-        var name = "";
+        var socket = io.connect('/');
+
+
         if(name == ""){
           $("#data").attr('placeholder', 'send message as audience');
         }else{
           $("#data").attr('placeholder', 'send message as ' + name);
         }
 
-        var socket = io.connect('/');
-
+        // modal name submission binding
+        // in progress
+        $('#modalNameSubmitBtn').on('click', function (e) {
+          // alert(document.getElementById("modalNameContent").value);
+          name = document.getElementById("modalNameContent").value;
+          // socket.emit('adduser', document.getElementById("modalNameContent").value);
+          $("#data").attr('placeholder', 'send message as ' + name);
+          socket.emit('disconnected');
+          socket.emit('adduser', name);
+        });
+        // test ends
 
         // on connection to server, ask for user's name with an anonymous callback
         socket.on('connect', function() {
@@ -128,7 +139,7 @@
       </div>
     </div> -->
     <!-- reqired jquery version 1.9.1 or higher -->
-
+    <!-- // <script type="text/javascript" src="/scripts/jquery.event.drag-2.0.js"></script> -->
     <script>
     function draw() {
       var canvas = document.getElementById("mycanvas");
@@ -144,6 +155,12 @@
       } else {
         alert("Canvas isn't supported.");
       }
+    }
+
+    function prepareCanvas() {
+      var parent = getElementById('my-container');
+      var canvas = document.createElement("CANVAS");
+      parent.appendChild(canvas);
     }
 
     $(function() {
