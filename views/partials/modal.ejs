@@ -7,17 +7,18 @@
         </div>
         <div class="modal-body">
             <p>Please fill your preferred name in the input box</p>
-            <p class="text-warning"><small>If you don't save, you will be onf of the audience.</small></p>
+            <p class="text-warning"><small>If you don't save, you will be one of the audience.</small></p>
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
+              <input type="text" id="modalNameContent" value="" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
               <!-- <span class="input-group-addon" id="basic-addon2">@example.com</span> -->
               <span class="input-group-btn">
-                <button id="modalNameSubmitBtn" class="btn btn-default" type="button">Go!</button>
+                <button id="modalNameSubmitBtn" class="btn btn-default" data-dismiss="modal" type="button">Go!</button>
               </span>
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <!-- dismiss modal via go button -->
+            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
             <!-- <button type="button" class="btn btn-primary" data-dismiss="modal">Submit</button> -->
         </div>
       </div>
