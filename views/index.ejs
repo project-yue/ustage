@@ -127,23 +127,19 @@
             }
           });
         });
-
       </script>
     </div>
     <!-- This is canvas drawing function with bootstrap -->
-    <!-- <div class="container container-main">
-      <div class="container-canvas">
-        <canvas id="mycanvas" width="800" height="480">
-          This is my fallback content.
-        </canvas>
-      </div>
-    </div> -->
-    <!-- reqired jquery version 1.9.1 or higher -->
-    <!-- // <script type="text/javascript" src="/scripts/jquery.event.drag-2.0.js"></script> -->
     <script>
     function draw() {
-      var canvas = document.getElementById("mycanvas");
-
+      var parent = document.getElementById("container11");
+      var canvas = document.createElement("canvas");
+      var canvasWidth= $('#container11').width();
+      // yl the height of container-fluid is not fixed
+      var canvasHeight = $('#container11').height();
+      canvas.setAttribute("width", canvasWidth);
+      canvas.setAttribute("height", canvasHeight);
+      canvas.setAttribute("id", 'canvas');
       if (canvas.getContext) {
         var ctx = canvas.getContext("2d");
 
@@ -152,20 +148,14 @@
 
         ctx.fillStyle = "rgba(0,0,200,0.5)";
         ctx.fillRect(30, 30, 55, 50);
+        parent.appendChild(canvas);
       } else {
         alert("Canvas isn't supported.");
       }
     }
 
-    function prepareCanvas() {
-      var parent = getElementById('my-container');
-      var canvas = document.createElement("CANVAS");
-      parent.appendChild(canvas);
-    }
-
     $(function() {
       draw();
-      // prepareCanvas();
     });
     </script>
   </body>
