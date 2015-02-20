@@ -69,10 +69,6 @@ io.sockets.on('connection', function(socket) {
     socket.broadcast.emit('servernotification', { username: socket.username });
   });
 
-  // drawing function
-  // socket.on("drawing", function(msg){
-  //   io.emit("drawing", msg);
-  // });
-
+  // drawing
 
 });
