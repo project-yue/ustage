@@ -14,23 +14,6 @@
     <%include partials/modal.ejs %>
     <script>
 
-        // rewrite modal binding, fixed modal shows and immediately disappears issue
-        // function toggleModalButton() {
-        //     $('#myModal').modal('toggle');
-        // }
-
-        function getName() {
-          var name = window.names[Math.floor(Math.random() * window.names.length)];
-
-          var tokens = name.split(',');
-
-          if(tokens.length > 1) {
-            return $.trim(tokens[1]) + " " + $.trim(tokens[0]);
-          }
-
-          return name;
-        }
-
         function escaped(s) {
           return $("<div></div>").html(s).html();
         }
@@ -47,11 +30,6 @@
         }
         // name field
         var name = "";
-
-        // sign in button binding
-        // $(function(){
-          // $('#signInBtn').on('click', toggleModalButton());
-        // });
 
         var socket = io.connect('/');
 
@@ -127,36 +105,51 @@
             }
           });
         });
+
+
       </script>
     </div>
     <!-- This is canvas drawing function with bootstrap -->
+    <!-- <script charset="utf-8"> -->
+
+    <!-- </script> -->
+
     <script>
-    function draw() {
-      var parent = document.getElementById("container11");
-      var canvas = document.createElement("canvas");
-      var canvasWidth= $('#container11').width();
-      // yl the height of container-fluid is not fixed
-      var canvasHeight = $('#container11').height();
-      canvas.setAttribute("width", canvasWidth);
-      canvas.setAttribute("height", canvasHeight);
-      canvas.setAttribute("id", 'canvas');
-      if (canvas.getContext) {
-        var ctx = canvas.getContext("2d");
-
-        ctx.fillStyle = "rgb(200,0,0)";
-        ctx.fillRect(10, 10, 55, 50);
-
-        ctx.fillStyle = "rgba(0,0,200,0.5)";
-        ctx.fillRect(30, 30, 55, 50);
+      function draw() {
+        var parent = document.getElementById("container11");
+        var canvas = document.createElement("canvas");
+        var canvasWidth= $('#container11').width();
+        // yl the height of container-fluid is not fixed
+        var canvasHeight = $('#container11').height();
+        canvas.setAttribute("width", canvasWidth);
+        canvas.setAttribute("height", canvasHeight);
+        canvas.setAttribute("id", 'mycanvas');
+        var left = canvas.offsetLeft,
+            top = canvas.offsetTop;
         parent.appendChild(canvas);
-      } else {
-        alert("Canvas isn't supported.");
-      }
-    }
+        if (canvas.getContext) {
+          var ctx = canvas.getContext("2d");
 
-    $(function() {
-      draw();
-    });
+          // ctx.fillStyle = "rgb(200,0,0)";
+          // ctx.fillRect(10, 10, 55, 50);
+          //
+          // ctx.fillStyle = "rgba(0,0,200,0.5)";
+          // ctx.fillRect(30, 30, 55, 50);
+
+          // local drawing
+          canvas.addEventListener('click', function(event){
+            var x =  event.pageX - $("#container11").offset().left,
+                y = event.pageY - $("#container11").offset().top;
+            ctx.strokeRect(x,y,1,1);
+          }, false);
+        } else {
+          alert("Canvas isn't supported.");
+        }
+      }
+
+      $(function() {
+        draw();
+      });
     </script>
   </body>
 </html>

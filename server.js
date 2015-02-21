@@ -70,5 +70,5 @@ io.sockets.on('connection', function(socket) {
   });
 
   // drawing
-
+  
 });
