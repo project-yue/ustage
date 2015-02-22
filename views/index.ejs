@@ -28,6 +28,26 @@
           var time = dt.getHours() + ":" + dt.getMinutes() + ":"+ dt.getSeconds();
           return time;
         }
+
+        // canvas
+        var canvasParent = document.getElementById("container11");
+        var canvas = document.createElement("canvas");
+        var canvasWidth= $('#container11').width();
+        // yl the height of container-fluid is not fixed
+        var canvasHeight = $('#container11').height();
+        canvas.setAttribute("width", canvasWidth);
+        canvas.setAttribute("height", canvasHeight);
+        canvas.setAttribute("id", 'mycanvas');
+        var left = canvas.offsetLeft,
+            top = canvas.offsetTop;
+        canvasParent.appendChild(canvas);
+        var ctx = canvas.getContext("2d");
+        //
+
+        function draw(x, y) {
+            ctx.strokeRect(x,y,1,1);
+        }
+
         // name field
         var name = "";
 
@@ -106,50 +126,19 @@
           });
         });
 
+        // send to server the drawing request
+        $('#mycanvas').on('click', function (event) {
+          var x =  event.pageX - $("#container11").offset().left,
+              y = event.pageY - $("#container11").offset().top;
+              socket.emit('drawing', x, y);
+        });
+
+        // drawing listener from the server
+        socket.on('drawdot', function(x, y) {
+          draw(x, y);
+        });
 
       </script>
     </div>
-    <!-- This is canvas drawing function with bootstrap -->
-    <!-- <script charset="utf-8"> -->
-
-    <!-- </script> -->
-
-    <script>
-      function draw() {
-        var parent = document.getElementById("container11");
-        var canvas = document.createElement("canvas");
-        var canvasWidth= $('#container11').width();
-        // yl the height of container-fluid is not fixed
-        var canvasHeight = $('#container11').height();
-        canvas.setAttribute("width", canvasWidth);
-        canvas.setAttribute("height", canvasHeight);
-        canvas.setAttribute("id", 'mycanvas');
-        var left = canvas.offsetLeft,
-            top = canvas.offsetTop;
-        parent.appendChild(canvas);
-        if (canvas.getContext) {
-          var ctx = canvas.getContext("2d");
-
-          // ctx.fillStyle = "rgb(200,0,0)";
-          // ctx.fillRect(10, 10, 55, 50);
-          //
-          // ctx.fillStyle = "rgba(0,0,200,0.5)";
-          // ctx.fillRect(30, 30, 55, 50);
-
-          // local drawing
-          canvas.addEventListener('click', function(event){
-            var x =  event.pageX - $("#container11").offset().left,
-                y = event.pageY - $("#container11").offset().top;
-            ctx.strokeRect(x,y,1,1);
-          }, false);
-        } else {
-          alert("Canvas isn't supported.");
-        }
-      }
-
-      $(function() {
-        draw();
-      });
-    </script>
   </body>
 </html>
