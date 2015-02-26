@@ -42,6 +42,7 @@
             top = canvas.offsetTop;
         canvasParent.appendChild(canvas);
         var ctx = canvas.getContext("2d");
+        var isMouseDown = false;
         //
 
         function draw(x, y) {
@@ -126,11 +127,31 @@
           });
         });
 
-        // send to server the drawing request
-        $('#mycanvas').on('click', function (event) {
+        // send to server the drawing binding
+        $('#mycanvas').mousedown(function (event) {
           var x =  event.pageX - $("#container11").offset().left,
               y = event.pageY - $("#container11").offset().top;
+              isMouseDown = true;
               socket.emit('drawing', x, y);
+        });
+
+        // move binding
+        $('#mycanvas').mousemove(function (event) {
+          if(isMouseDown) {
+            var x =  event.pageX - $("#container11").offset().left,
+                y = event.pageY - $("#container11").offset().top;
+                socket.emit('drawing', x, y);
+          }
+        });
+
+        // mouse up binding
+        $('#mycanvas').mouseup(function(e){
+          isMouseDown = false;
+        });
+
+        // mouse leave binding
+        $('#mycanvas').mouseleave(function(e){
+          isMouseDown = false;
         });
 
         // drawing listener from the server
