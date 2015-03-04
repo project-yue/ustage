@@ -25,7 +25,7 @@ function filterNullValues (i) {
 
 io.sockets.on('connection', function(socket) {
 
-  // an Audience Count method
+  // an Audience Count method io.sockets.clents().length
   function updateAudienceCount() {
     var count = io.sockets.clients().filter(filterNullValues).length - Object.keys(usernames).length;
     return count;
@@ -37,11 +37,11 @@ io.sockets.on('connection', function(socket) {
     // the problem is I dont know how to pass it to the client side.
     var Cylon = require('cylon');
     Cylon.robot({
-      connection: { name: 'speech', adaptor: 'speech', voice: 'en-m3', speed: 90 },
+      connection: { name: 'speech', adaptor: 'speech', voice: 'en-m1', speed: 50 },
       device: {name: 'mouth', driver: 'speech'},
 
       work: function(my) {
-        my.mouth.say("Still yet passed to the client side!");
+        my.mouth.say(data);
       }
     }).start();
     //test end
@@ -70,17 +70,21 @@ io.sockets.on('connection', function(socket) {
 
   // when the user disconnects.. perform this
   socket.on('disconnect', function(){
-    delete usernames[socket.username];
+    if(socket.username !== undefined){
+      delete usernames[socket.username];
+    }
     io.sockets.emit('updateusers', usernames);
-    // io.sockets.emit('updateAudience', updateAudienceCount());
+    // NOTICE!! this line of code below actually needs some attention.
+    //
+    io.sockets.emit('updateAudience', (updateAudienceCount() - 1));
     // check whether connection is a player
     if(socket.username === undefined){
       socket.broadcast.emit('servernotification', { username: "An audience" });
     }else{
       socket.broadcast.emit('servernotification', { username: socket.username });
     }
-    io.sockets.emit('updateAudience', updateAudienceCount());
   });
+
 
   // drawing under test
   socket.on('drawing', function(x, y) {
