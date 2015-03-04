@@ -1,7 +1,8 @@
 {
   "name": "nodejs-upstage",
-  "version": "0.0.4-21",
-  "description": "UpStage trial using nodejs, socket.io, and bootstrap",
+  "version": "0.0.5",
+  "description": "An UpStage trial using nodejs, html5 canvas, JQuery, socket.io, and bootstrap",
+  "author": "Yue Li <yue.li.akl@gmail.com>",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
