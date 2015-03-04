@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
-var nodes = { };
 var usernames = {};
 var audienceNum = 0;
 var port = 3000;
@@ -19,8 +18,19 @@ app.get('/', function (req, res) {
   res.render('index');
 });
 
+// a generic method to check connection length
+function filterNullValues (i) {
+  return (i!==null);
+}
+
 io.sockets.on('connection', function(socket) {
 
+  // an Audience Count method
+  function updateAudienceCount() {
+    var count = io.sockets.clients().filter(filterNullValues).length - Object.keys(usernames).length;
+    return count;
+  }
+  updateAudienceCount();
   socket.on('sendchat', function (data) {
     // test start,
     // it currently only works on the server-end.
@@ -41,10 +51,7 @@ io.sockets.on('connection', function(socket) {
 
   // here is the thing for adding audience number
   socket.on('addAudience', function(){
-    // must be ++ first; otherwise, the audience number is always shows 1 less
-    // the correct number
-    ++audienceNum;
-    io.sockets.emit('updateAudience', audienceNum);
+    io.sockets.emit('updateAudience', updateAudienceCount());
     io.sockets.emit('updateusers', usernames);
   });
 
@@ -57,16 +64,22 @@ io.sockets.on('connection', function(socket) {
       socket.emit('servernotification', { connected: true, to_self: true, username: username });
       socket.broadcast.emit('servernotification', { connected: true, username: username });
       io.sockets.emit('updateusers', usernames);
-    }
+      io.sockets.emit('updateAudience', updateAudienceCount());
+      }
   });
 
   // when the user disconnects.. perform this
   socket.on('disconnect', function(){
-    --audienceNum;
-    io.sockets.emit('updateAudience', audienceNum);
     delete usernames[socket.username];
     io.sockets.emit('updateusers', usernames);
-    socket.broadcast.emit('servernotification', { username: socket.username });
+    // io.sockets.emit('updateAudience', updateAudienceCount());
+    // check whether connection is a player
+    if(socket.username === undefined){
+      socket.broadcast.emit('servernotification', { username: "An audience" });
+    }else{
+      socket.broadcast.emit('servernotification', { username: socket.username });
+    }
+    io.sockets.emit('updateAudience', updateAudienceCount());
   });
 
   // drawing under test
