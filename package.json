@@ -20,6 +20,6 @@
   },
   "subdomain": "project-yue-upstage-redesign",
   "engines": {
-    "node": ">=0.8.x"
+    "node": ">=0.8.0"
   }
 }
