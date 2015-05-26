@@ -4,7 +4,7 @@ var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 var usernames = {};
 var audienceNum = 0;
-var port = 3000;
+var port = 30000;
 server.listen(process.env.PORT || port);
 console.log('server is listening on ' + port);
 app.set('view engine', 'ejs');
