@@ -23,4 +23,4 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ##How to use this project:
 You must have installed NodeJS onto your computer.
-<p>In terminal, cd to the project root folder. Execute "npm install". Once the module installation completed, enter "node server.js to start the server. The final step is to open a browser, and type in "localhost:3000". It should bring up this Node application.</p>
+<p>In terminal, cd to the project root folder. Execute "npm install". Once the module installation completed, enter "node server.js to start the server. The final step is to open a browser, and type in "localhost:30000". It should bring up this Node application.</p>
