@@ -35,15 +35,15 @@ io.sockets.on('connection', function(socket) {
     // test start,
     // it currently only works on the server-end.
     // the problem is I dont know how to pass it to the client side.
-    var Cylon = require('cylon');
-    Cylon.robot({
-      connection: { name: 'speech', adaptor: 'speech', voice: 'en-m1', speed: 50 },
-      device: {name: 'mouth', driver: 'speech'},
-
-      work: function(my) {
-        my.mouth.say(data);
-      }
-    }).start();
+    // var Cylon = require('cylon');
+    // Cylon.robot({
+    //   connection: { name: 'speech', adaptor: 'speech', voice: 'en-m1', speed: 50 },
+    //   device: {name: 'mouth', driver: 'speech'},
+    //
+    //   work: function(my) {
+    //     my.mouth.say(data);
+    //   }
+    // }).start();
     //test end
     io.sockets.emit('updatechat', socket.username, data);
   });

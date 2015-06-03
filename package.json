@@ -15,8 +15,8 @@
     "express": "~3.0.1",
     "ejs": "~0.8.3",
     "socket.io": "~0.9.11",
-    "cylon": "~0.22.0",
-    "cylon-speech": "~0.6.0"
+    /*"cylon": "~0.22.0",*/
+    /*"cylon-speech": "~0.6.0"*/
   },
   "subdomain": "project-yue-upstage-redesign",
   "engines": {
