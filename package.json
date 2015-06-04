@@ -15,8 +15,7 @@
   "dependencies": {
     "express": "~3.0.1",
     "ejs": "~0.8.3",
-    "socket.io": "~0.9.11",
-    "karma": "~0.12.30"
+    "socket.io": "~0.9.11"
   },
   "subdomain": "project-yue-upstage-redesign",
   "engines": {
