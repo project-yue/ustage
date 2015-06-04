@@ -1,5 +1,11 @@
 #NodeJS UpStage Proof of concept
 
+#### Rationale
+
+In the current UpStage implementation, the ActionScript (AS) code on the client side requires Flashplugin. The AS code provide all the functionalities for UpStage users. The main features include: real time chatting, drawing, moving avatar etc.
+The idea is to replace the above functionalities from the current AS work into some other technologies with better compatibility. I then found HTML tags for holding the performing elements, Bootstrap for rendering stages, JQuery to handle events from clients, and NodeJS as a substitute for Twisted framework. I prefer NodeJS over Twisted as I can develop the whole software under my scope, and test my work instantly without any hassle in application build process.
+
+
 #### Travis CI Build Status
 
 [![Build Status](https://travis-ci.org/yue-l/ustage.svg?branch=master)](https://travis-ci.org/yue-l/ustage)
