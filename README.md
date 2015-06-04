@@ -1,6 +1,10 @@
-#License Declaration
-NodeJS UpStage trail with Bootstrap
+#NodeJS UpStage Proof of concept
+
+#### Travis CI Build Status
+
 [![Build Status](https://travis-ci.org/yue-l/ustage.svg?branch=master)](https://travis-ci.org/yue-l/ustage)
+
+####License Declaration
 
 This project was developed for meeting the redesign requirements of UpStage. This trial is developed in HTML5 stack with NodeJS as server.
 
