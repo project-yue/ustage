@@ -1,11 +1,12 @@
 {
   "name": "nodejs-upstage",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "An UpStage trial using nodejs, html5 canvas, JQuery, socket.io, and bootstrap",
   "author": "Yue Li <yue.li.akl@gmail.com>",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "true"
   },
   "repository": {
     "type": "git",
@@ -14,7 +15,8 @@
   "dependencies": {
     "express": "~3.0.1",
     "ejs": "~0.8.3",
-    "socket.io": "~0.9.11"
+    "socket.io": "~0.9.11",
+    "karma": "~0.12.30"
   },
   "subdomain": "project-yue-upstage-redesign",
   "engines": {
